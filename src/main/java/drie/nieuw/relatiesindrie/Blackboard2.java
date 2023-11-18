@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RelatiesindrieApplication {
+public class Blackboard2 {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RelatiesindrieApplication.class, args);
+		SpringApplication.run(Blackboard2.class, args);
 	}
 
 }

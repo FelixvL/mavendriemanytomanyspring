@@ -1,9 +1,10 @@
 package drie.nieuw.relatiesindrie.model;
 
 import java.util.List;
-import java.util.Set;
-import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,46 +16,64 @@ public class Pagina {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	private String deTitel;
-	private String schrijver;
-	private String inhoud;
-	
+	private String title;
+	private String subtitle;
+	private String author;
+	@Column(length=20000) // Q:het heeft GEEN effect op de varchar size in de database, 
+	// het wordt een text-veld -> ik begrijp het verschil niet met song.java uit SONGBOOK
+	// bovendien heb ik het veld handmatig goed gezet in phpMyAdmin... dat moet beter!
+	String codetext;	
 	@OneToMany(mappedBy = "pagina")
-	private Set<PaginaPerLijst> lijsten;
-	
+	private List<PaginaPerLijst> lijsten;
+	//-------------------------------------------------
+	public String getAuthor() {
+		return author;
+	}
+	//-------------------------------------------------
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	//-------------------------------------------------	
+	public String getCodetext() {
+		return codetext;
+	}
+	//-------------------------------------------------
+	public void setCodetext(String codetext) {
+		this.codetext = codetext;
+	}
+	//------------------------------------------------
+	public String getSubtitle() {
+		return subtitle;
+	}
+	//-------------------------------------------------
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+	//-------------------------------------------------
 	public long getId() {
 		return id;
 	}
+	//-------------------------------------------------
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getDeTitel() {
-		return deTitel;
+	//-------------------------------------------------
+	public String getTitle() {
+		return title;
 	}
-	public void setDeTitel(String deTitel) {
-		this.deTitel = deTitel;
+	//-------------------------------------------------
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getSchrijver() {
-		return schrijver;
-	}
-	public void setSchrijver(String schrijver) {
-		this.schrijver = schrijver;
-	}
-	public String getInhoud() {
-		return inhoud;
-	}
-	public void setInhoud(String inhoud) {
-		this.inhoud = inhoud;
-	}
-	
-	public Set<PaginaPerLijst> getLijsten() {
+	//-------------------------------------------------
+	@JsonIgnore
+	public List<PaginaPerLijst> getLijsten() {
 		return lijsten;
 	}
-	public void setLijsten(Set<PaginaPerLijst> lijsten) {
+	//-------------------------------------------------
+	@JsonIgnore
+	public void setLijsten(List<PaginaPerLijst> lijsten) {
 		this.lijsten = lijsten;
 	}
-	
-	
-	
+	//-------------------------------------------------
 }
