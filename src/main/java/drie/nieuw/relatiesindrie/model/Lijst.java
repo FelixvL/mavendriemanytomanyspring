@@ -1,9 +1,10 @@
 package drie.nieuw.relatiesindrie.model;
 
 import java.util.List;
-import java.util.Set;
-import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,37 +16,35 @@ public class Lijst {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	private String lijstNaam;
-	private String categorie;
-	@OneToMany(mappedBy = "lijst")
-	private Set<PaginaPerLijst> paginas;
-	
+	private String name;
+	@OneToMany(mappedBy = "lijst",cascade = CascadeType.ALL)
+	private List<PaginaPerLijst> paginas;
+	//-------------------------------------------------	
 	public long getId() {
 		return id;
 	}
+	//-------------------------------------------------
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getLijstNaam() {
-		return lijstNaam;
+	//-------------------------------------------------
+	public String getName() {
+		return name;
 	}
-	public void setLijstNaam(String lijstNaam) {
-		this.lijstNaam = lijstNaam;
+	//-------------------------------------------------
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getCategorie() {
-		return categorie;
-	}
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
-	}
-	public Set<PaginaPerLijst> getPaginas() {
+	//-------------------------------------------------
+	@JsonIgnore
+	public List<PaginaPerLijst> getPaginas() {
+		System.out.println("Lijst.java::getPaginas functie called"+this.id);
 		return paginas;
 	}
-	public void setPaginas(Set<PaginaPerLijst> paginas) {
+	//-------------------------------------------------
+	@JsonIgnore
+	public void setPaginas(List<PaginaPerLijst> paginas) {
 		this.paginas = paginas;
 	}
-	
-	
-
+	//-------------------------------------------------
 }
