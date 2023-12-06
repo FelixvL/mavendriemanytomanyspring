@@ -1,9 +1,5 @@
 package drie.nieuw.relatiesindrie.persistence;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +7,6 @@ import drie.nieuw.relatiesindrie.model.Lijst;
 import drie.nieuw.relatiesindrie.model.Pagina;
 import drie.nieuw.relatiesindrie.model.PaginaPerLijst;
 
-/*IVO ADDED THIS FILE*/
 @Service
 public class PaginaPerLijstService {
 	@Autowired
@@ -28,16 +23,19 @@ public class PaginaPerLijstService {
 		return pageperlistrepository.findAll();
 	}
 	// -------------------------------------------------
-	public Iterable<Pagina> getPaginasVanLijst(int id) {//dit gaat niet goed...
+	public Iterable<PaginaPerLijst> getPaginasVanLijst(int lijst_id) {//dit gaat niet goed...
 
-		System.out.println("getPaginasVanLijst called / "+id);
+		System.out.println("getPaginasVanLijst called / "+lijst_id);
 		// To Do: "SELECT * from pagina_per_lijst WHERE lijst-id = "+id;
 		//pageperlistrepository.findAllById(id);
-
-		return null;
+		return pageperlistrepository.findPaginasByLijst_idOrderByVolgordeAsc(lijst_id);
 	}
 	//-------------------------------------------------	
-	public Lijst addPageToLijst(Lijst l, Pagina p,int volgorde) {
+	public void removePaginaFromLijst(int lijst_id, int pagina_id){
+		pageperlistrepository.removePaginaFromLijst(lijst_id, pagina_id);
+	}
+	//-------------------------------------------------	
+	public Lijst addPageToLijst(Lijst l, Pagina p, int volgorde) {
 		System.out.println("addPageToLijst");
 		System.out.println("idlijst = " + l.getId());
 		System.out.println("idpage = " + p.getId());	
@@ -49,7 +47,7 @@ public class PaginaPerLijstService {
 	}
 	//-------------------------------------------------	
 	public PaginaPerLijst savePaginaPerLijst(PaginaPerLijst ppl ) {
-		System.out.println("savePaginaPerLijst :" + ppl.getId());
+		System.out.println("PPL.id > " + ppl.getId());
 
 		/*
 		Lijst l = ppl.getLijst();
@@ -61,9 +59,13 @@ public class PaginaPerLijstService {
 		*/
 				
 		pageperlistrepository.save(ppl);
-
-		
 		return ppl;
 	}
 	//-------------------------------------------------
+	public void deleteByLijst_id(int lijstid) {
+		System.out.println("PaginaPerLIjstService::deleteByLijst_id > " +lijstid);
+
+		// TODO Auto-generated method stub
+		pageperlistrepository.deletePaginasByLijst_id(lijstid);
+	}
 }

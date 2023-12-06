@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Pagina {
 	// het wordt een text-veld -> ik begrijp het verschil niet met song.java uit SONGBOOK
 	// bovendien heb ik het veld handmatig goed gezet in phpMyAdmin... dat moet beter!
 	String codetext;	
-	@OneToMany(mappedBy = "pagina")
+	@OneToMany(mappedBy = "pagina", cascade = CascadeType.REMOVE)
 	private List<PaginaPerLijst> lijsten;
 	//-------------------------------------------------
 	public String getAuthor() {

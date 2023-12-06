@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import drie.nieuw.relatiesindrie.model.Lijst;
-import drie.nieuw.relatiesindrie.model.Pagina;
-import drie.nieuw.relatiesindrie.persistence.LijstService;
+import drie.nieuw.relatiesindrie.model.Lijst;import drie.nieuw.relatiesindrie.persistence.LijstService;
 
 @RestController
 public class LijstEndpoint {
@@ -22,15 +20,6 @@ public class LijstEndpoint {
 		return ls.getAllLists();
 	}
 	// -------------------------------------------------
-	/*
-	@GetMapping("getpaginasvanlijst/{id}")
-	public Iterable<Pagina> getPaginasVanLijst(@PathVariable Long id) {
-		System.out.println("TO DO: getpaginasvanlijst/" + id);
-
-		return null;
-	}
-	*/
-	// -------------------------------------------------
 	// POST method
 	@PostMapping("savelijst")
 	public Lijst saveList(@RequestBody Lijst lijst) {
@@ -42,6 +31,7 @@ public class LijstEndpoint {
 	// GET method
 	@GetMapping("deletelijst/{id}")
 	public void deletelist(@PathVariable Long id) {
+		System.out.println("deletelist " +  id);
 		ls.deleteList(id);
 	}
 	// -------------------------------------------------

@@ -38,6 +38,7 @@ public class PaginaEndpoint {
 	// GET method
 	@GetMapping("deletepagina/{id}")
 	public void deletepage(@PathVariable Long id) { 
+		System.out.println("deletepagina"+id);
 		ps.deletePage(id);
 	}
 	//-------------------------------------------------

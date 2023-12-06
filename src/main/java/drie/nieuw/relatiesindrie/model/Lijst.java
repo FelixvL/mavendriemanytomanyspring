@@ -1,10 +1,10 @@
 package drie.nieuw.relatiesindrie.model;
 
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +17,7 @@ public class Lijst {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
-	@OneToMany(mappedBy = "lijst")
+	@OneToMany(mappedBy = "lijst",cascade = CascadeType.ALL)
 	private List<PaginaPerLijst> paginas;
 	//-------------------------------------------------	
 	public long getId() {

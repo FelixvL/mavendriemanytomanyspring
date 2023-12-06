@@ -26,6 +26,7 @@ public class PaginaService {
 	}
 	// -------------------------------------------------
 	public void deletePage(Long id) {
+		System.out.println("deletePage Endpoint: "+id);
 		pr.deleteById(id);	
 	}
 	// -------------------------------------------------
